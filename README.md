@@ -9,7 +9,7 @@ This project is a way to learn Vulkan, I am following [the official Vulkan tutor
 ### Dependencies
 On a Debian system you can install the needed dependencies using:
 ```shell
-sudo apt install g++ cmake make libvulkan-dev vulkan-validationlayers spirv-tools libxxf86vm-dev libxi-dev libglfw3-dev libglm-dev
+sudo apt install g++ cmake make libvulkan-dev vulkan-validationlayers spirv-tools libxxf86vm-dev libxi-dev libglfw3-dev libglm-dev libxxf86vm-dev libxi-dev
 ```
 
 ### Clone Repository
