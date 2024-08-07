@@ -7,9 +7,10 @@
 #include <iostream>
 #include <stdexcept>
 
+Application application;
+
 int main() {
     try {
-        Application application;
         application.run();
     } catch(const std::exception& exception) {
         std::cerr << "ERROR : " << exception.what() << '\n';

@@ -21,7 +21,7 @@ set(SOURCES
         src/Application.cpp
 
         # Other Sources
-
+        src/callbacks.cpp
 
         # Libraries
 
@@ -35,7 +35,14 @@ set(INCLUDES
 )
 
 set(LIBRARIES
-
+        glfw
+        vulkan
+        dl
+        pthread
+        X11
+        Xxf86vm
+        Xrandr
+        Xi
 )
 
 # Executable
