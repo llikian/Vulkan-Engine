@@ -19,7 +19,7 @@ public:
     /**** Constructor & Destructor ****/
 
     /**
-     * @brief Sets the default value of all member variables and constants.
+     * @brief Constructor.
      */
     Application();
 
@@ -54,9 +54,19 @@ private:
     /**** Private Methods ****/
 
     /**
-     * @brief Initializes the GLFW window.
+     * @brief Initializes GLFW and the GLFW window.
      */
     void initWindow();
+
+    /**
+     * @brief Initializes Vulkan.
+     */
+    void initVulkan();
+
+    /**
+     * @brief Creates the Vulkan Instance.
+     */
+    void initInstance();
 
     /**
      * @brief Polls and handles events with GLFW.
@@ -72,6 +82,8 @@ private:
     GLFWwindow* window;  ///< GLFW window.
     unsigned int width;  ///< The width of the window in pixels.
     unsigned int height; ///< The height of the window in pixels.
+
+    VkInstance instance; ///< Vulkan instance.
 
     std::unordered_map<int, bool> keys; ///< Map of the current state of keys.
 };

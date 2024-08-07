@@ -5,16 +5,22 @@
 
 #include "Application.hpp"
 
+#include <iostream>
 #include <stdexcept>
+#include <vector>
 #include "callbacks.hpp"
 
 Application::Application()
     : window(nullptr), width(1600u), height(900u) {
 
     initWindow();
+    initVulkan();
 }
 
 Application::~Application() {
+    /**** Vulkan ****/
+    vkDestroyInstance(instance, nullptr);
+
     /**** GLFW ****/
     glfwDestroyWindow(window);
     glfwTerminate();
@@ -55,6 +61,30 @@ void Application::initWindow() {
     glfwSetWindowSizeCallback(window, windowSizeCallback);
     glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
     glfwSetKeyCallback(window, keyCallback);
+}
+
+void Application::initVulkan() {
+    initInstance();
+}
+
+void Application::initInstance() {
+    VkApplicationInfo info{};
+    info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+    info.pApplicationName = "Vulkan Engine";
+    info.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
+    info.pEngineName = "No Engine";
+    info.engineVersion = VK_MAKE_VERSION(1, 0, 0);
+    info.apiVersion = VK_API_VERSION_1_0;
+
+    VkInstanceCreateInfo cInfo{};
+    cInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+    cInfo.pApplicationInfo = &info;
+    cInfo.ppEnabledExtensionNames = glfwGetRequiredInstanceExtensions(&cInfo.enabledExtensionCount);
+    cInfo.enabledLayerCount = 0;
+
+    if(vkCreateInstance(&cInfo, nullptr, &instance) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create instance.");
+    }
 }
 
 void Application::handleEvents() {
