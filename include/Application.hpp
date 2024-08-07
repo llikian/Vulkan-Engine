@@ -6,9 +6,11 @@
 #pragma once
 
 #define GLFW_INCLUDE_VULKAN
+
 #include <GLFW/glfw3.h>
 
 #include <unordered_map>
+#include <vector>
 
 /**
  * @class Application
@@ -68,6 +70,29 @@ private:
      */
     void initInstance();
 
+    void checkValidationLayerSupport();
+
+    std::vector<const char*> getRequiredExtensions();
+
+    static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
+        VkDebugUtilsMessageSeverityFlagBitsEXT severity,
+        VkDebugUtilsMessageTypeFlagsEXT type,
+        const VkDebugUtilsMessengerCallbackDataEXT* callbackData,
+        void* userDate);
+
+    void setupDebugMessenger();
+
+    static VkResult createDebugUtilsMessengerEXT(
+        VkInstance instance,
+        const VkDebugUtilsMessengerCreateInfoEXT* cInfo,
+        const VkAllocationCallbacks* allocator,
+        VkDebugUtilsMessengerEXT* debugMessenger);
+
+    static void destroyDebugUtilsMessengerEXT(
+        VkInstance instance,
+        VkDebugUtilsMessengerEXT debugMessenger,
+        const VkAllocationCallbacks* pAllocator);
+
     /**
      * @brief Polls and handles events with GLFW.
      */
@@ -84,6 +109,8 @@ private:
     unsigned int height; ///< The height of the window in pixels.
 
     VkInstance instance; ///< Vulkan instance.
+    VkDebugUtilsMessengerEXT debugMessenger; ///< Debug messenger.
+    std::vector<const char*> validationLayers; ///< Active validation layers.
 
     std::unordered_map<int, bool> keys; ///< Map of the current state of keys.
 };
