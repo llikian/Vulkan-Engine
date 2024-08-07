@@ -1,6 +1,9 @@
-# Template
+# Vulkan-Engine
 ## Project Description
+This project is an implementation of a graphics engine using Vulkan.
+It uses ___ for window and event handling.
 
+This project is a way to learn Vulkan, I am following [the official Vulkan tutorial](https://docs.vulkan.org/tutorial/latest).
 
 ## Setup
 ### Dependencies
@@ -11,8 +14,8 @@ sudo apt install g++ cmake make
 
 ### Clone Repository
 ```shell
-git clone GIT_LINK
-cd Template
+git clone https://github.com/llikian/Vulkan-Engine.git
+cd Vulkan-Engine
 ```
 
 ### Build
@@ -29,7 +32,7 @@ cmake --build build -j
 
 Then you can run it using:
 ```shell
-bin/Template
+bin/Vulkan-Engine
 ```
 
 ## Credits

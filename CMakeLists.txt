@@ -1,6 +1,6 @@
 # Global Project Configuration
 cmake_minimum_required(VERSION 3.26)
-project(Template)
+project(Vulkan-Engine)
 
 # Find packages
 
@@ -18,7 +18,7 @@ set(SOURCES
         src/main.cpp
 
         # Classes
-
+        src/Application.cpp
 
         # Other Sources
 
