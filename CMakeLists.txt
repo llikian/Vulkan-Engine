@@ -22,6 +22,7 @@ set(SOURCES
 
         # Other Sources
         src/callbacks.cpp
+        src/vulkan_functions.cpp
 
         # Libraries
 

@@ -11,6 +11,13 @@
 
 #include <unordered_map>
 #include <vector>
+#include "vulkan_functions.hpp"
+
+#ifdef NDEBUG
+    #define IS_DEBUG false
+#else
+    #define IS_DEBUG true
+#endif
 
 /**
  * @class Application
@@ -74,24 +81,8 @@ private:
 
     std::vector<const char*> getRequiredExtensions();
 
-    static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
-        VkDebugUtilsMessageSeverityFlagBitsEXT severity,
-        VkDebugUtilsMessageTypeFlagsEXT type,
-        const VkDebugUtilsMessengerCallbackDataEXT* callbackData,
-        void* userDate);
 
     void setupDebugMessenger();
-
-    static VkResult createDebugUtilsMessengerEXT(
-        VkInstance instance,
-        const VkDebugUtilsMessengerCreateInfoEXT* cInfo,
-        const VkAllocationCallbacks* allocator,
-        VkDebugUtilsMessengerEXT* debugMessenger);
-
-    static void destroyDebugUtilsMessengerEXT(
-        VkInstance instance,
-        VkDebugUtilsMessengerEXT debugMessenger,
-        const VkAllocationCallbacks* pAllocator);
 
     /**
      * @brief Polls and handles events with GLFW.

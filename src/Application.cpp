@@ -20,9 +20,9 @@ Application::Application()
 
 Application::~Application() {
     /**** Vulkan ****/
-    #ifndef NDEBUG
-    destroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
-    #endif
+    if(IS_DEBUG) {
+        destroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
+    }
 
     vkDestroyInstance(instance, nullptr);
 
@@ -87,13 +87,13 @@ void Application::initInstance() {
     cInfo.pApplicationInfo = &info;
     cInfo.ppEnabledExtensionNames = glfwGetRequiredInstanceExtensions(&cInfo.enabledExtensionCount);
 
-    #ifndef NDEBUG
-    checkValidationLayerSupport();
-    cInfo.enabledLayerCount = validationLayers.size();
-    cInfo.ppEnabledLayerNames = validationLayers.data();
-    #else
-    cInfo.enabledLayerCount = 0;
-    #endif
+    if(IS_DEBUG) {
+        checkValidationLayerSupport();
+        cInfo.enabledLayerCount = validationLayers.size();
+        cInfo.ppEnabledLayerNames = validationLayers.data();
+    } else {
+        cInfo.enabledLayerCount = 0;
+    }
 
     std::vector<const char*> extensions = getRequiredExtensions();
     cInfo.enabledExtensionCount = extensions.size();
@@ -140,27 +140,17 @@ std::vector<const char*> Application::getRequiredExtensions() {
 
     std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
 
-    #ifndef NDEBUG
-    extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
-    #endif
+    if(IS_DEBUG) {
+        extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+    }
 
     return extensions;
 }
 
-VkBool32 Application::debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT severity,
-                                    VkDebugUtilsMessageTypeFlagsEXT /* type */,
-                                    const VkDebugUtilsMessengerCallbackDataEXT* callbackData,
-                                    void* userData) {
-
-    std::cerr << "[DEBUG] " << callbackData->pMessage << '\n';
-
-    return VK_FALSE;
-}
-
 void Application::setupDebugMessenger() {
-    #ifdef NDEBUG
-    return;
-    #endif
+    if(!IS_DEBUG) {
+        return;
+    }
 
     VkDebugUtilsMessengerCreateInfoEXT cInfo{};
     cInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
@@ -174,35 +164,6 @@ void Application::setupDebugMessenger() {
 
     if(createDebugUtilsMessengerEXT(instance, &cInfo, nullptr, &debugMessenger) != VK_SUCCESS) {
         throw std::runtime_error("Failed to set up debug messenger.");
-    }
-}
-
-VkResult Application::createDebugUtilsMessengerEXT(
-    VkInstance instance,
-    const VkDebugUtilsMessengerCreateInfoEXT* cInfo,
-    const VkAllocationCallbacks* allocator,
-    VkDebugUtilsMessengerEXT* debugMessenger) {
-
-    auto func = (PFN_vkCreateDebugUtilsMessengerEXT)
-        vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
-
-    if(func != nullptr) {
-        return func(instance, cInfo, allocator, debugMessenger);
-    } else {
-        return VK_ERROR_EXTENSION_NOT_PRESENT;
-    }
-}
-
-void Application::destroyDebugUtilsMessengerEXT(
-    VkInstance instance,
-    VkDebugUtilsMessengerEXT debugMessenger,
-    const VkAllocationCallbacks* pAllocator) {
-
-    auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)
-        vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
-
-    if(func != nullptr) {
-        func(instance, debugMessenger, pAllocator);
     }
 }
 
