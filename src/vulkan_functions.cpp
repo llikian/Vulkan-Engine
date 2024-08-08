@@ -22,7 +22,7 @@ VkResult createDebugUtilsMessengerEXT(VkInstance instance,
                                       const VkAllocationCallbacks* allocator,
                                       VkDebugUtilsMessengerEXT* debugMessenger) {
 
-    auto func = (PFN_vkCreateDebugUtilsMessengerEXT)
+    static auto func = (PFN_vkCreateDebugUtilsMessengerEXT)
         vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
 
     if(func != nullptr) {
@@ -36,7 +36,7 @@ void destroyDebugUtilsMessengerEXT(VkInstance instance,
                                    VkDebugUtilsMessengerEXT debugMessenger,
                                    const VkAllocationCallbacks* pAllocator) {
 
-    auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)
+    static auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)
         vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
 
     if(func != nullptr) {
