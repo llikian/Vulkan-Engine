@@ -18,10 +18,21 @@ set(SOURCES
         src/main.cpp
 
         # Classes
+        src/Application.cpp
+        src/DebugMessenger.cpp
+        src/Instance.cpp
+        src/Window.cpp
 
+        src/maths/mat4.cpp
+        src/maths/quaternion.cpp
+        src/maths/vec2.cpp
+        src/maths/vec3.cpp
+        src/maths/vec4.cpp
 
         # Other Sources
-
+        src/maths/geometry.cpp
+        src/maths/transforms.cpp
+        src/maths/trigonometry.cpp
 
         # Libraries
 
@@ -35,7 +46,14 @@ set(INCLUDES
 )
 
 set(LIBRARIES
-
+        vulkan
+        glfw
+        dl
+        pthread
+        X11
+        Xxf86vm
+        Xrandr
+        Xi
 )
 
 # Executable
@@ -43,6 +61,8 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDES})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${LIBRARIES})
+
+target_compile_definitions(${PROJECT_NAME} PUBLIC $<$<CONFIG:Debug>:DEBUG>)
 
 # Set output directories
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)

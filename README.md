@@ -6,7 +6,7 @@
 ### Dependencies
 On a Debian system you can install the needed dependencies using:
 ```shell
-sudo apt install g++ cmake make
+sudo apt install g++ cmake make libvulkan-dev vulkan-validationlayers-dev spirv-tools libglfw3-dev
 ```
 
 ### Clone Repository
