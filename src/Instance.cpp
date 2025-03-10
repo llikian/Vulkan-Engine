@@ -10,11 +10,7 @@
 
 #include "types.hpp"
 
-Instance::Instance()
-#ifdef DEBUG
-    : debugMessenger(instance)
-#endif
-{
+Instance::Instance() {
     vk::ApplicationInfo appInfo;
     appInfo.sType = vk::StructureType::eApplicationInfo;
     appInfo.pApplicationName = "Vulkan Engine";
@@ -64,13 +60,13 @@ Instance::Instance()
     }
 
 #ifdef DEBUG
-    debugMessenger.create();
+    debugMessenger.create(instance);
 #endif
 }
 
 Instance::~Instance() {
 #ifdef DEBUG
-    debugMessenger.destroy();
+    debugMessenger.destroy(instance);
 #endif
 
     instance.destroy();

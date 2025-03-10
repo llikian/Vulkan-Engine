@@ -25,8 +25,7 @@ void vkDestroyDebugUtilsMessengerEXT(VkInstance instance,
     }
 }
 
-DebugMessenger::DebugMessenger(const vk::Instance& instance)
-    : instance(instance) {
+DebugMessenger::DebugMessenger() {
     createInfo.sType = vk::StructureType::eDebugUtilsMessengerCreateInfoEXT;
     createInfo.messageSeverity =
         vk::DebugUtilsMessageSeverityFlagBitsEXT::eError
@@ -43,11 +42,11 @@ DebugMessenger::DebugMessenger(const vk::Instance& instance)
     createInfo.pUserData = nullptr;
 }
 
-void DebugMessenger::create() {
+void DebugMessenger::create(const vk::Instance& instance) {
     debugMessenger = instance.createDebugUtilsMessengerEXT(createInfo);
 }
 
-void DebugMessenger::destroy() const {
+void DebugMessenger::destroy(const vk::Instance& instance) const {
     vkDestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
 }
 

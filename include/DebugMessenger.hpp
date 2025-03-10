@@ -13,10 +13,10 @@
  */
 class DebugMessenger {
 public:
-    explicit DebugMessenger(const vk::Instance& instance);
+    DebugMessenger();
 
-    void create();
-    void destroy() const;
+    void create(const vk::Instance& instance);
+    void destroy(const vk::Instance& instance) const;
 
     const VkDebugUtilsMessengerCreateInfoEXT* getCreateInfo() const;
 
@@ -29,5 +29,4 @@ private:
 
     vk::DebugUtilsMessengerCreateInfoEXT createInfo;
     vk::DebugUtilsMessengerEXT debugMessenger;
-    const vk::Instance& instance;
 };
