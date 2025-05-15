@@ -19,20 +19,9 @@ set(SOURCES
 
         # Classes
         src/Application.cpp
-        src/DebugMessenger.cpp
-        src/Instance.cpp
         src/Window.cpp
 
-        src/maths/mat4.cpp
-        src/maths/quaternion.cpp
-        src/maths/vec2.cpp
-        src/maths/vec3.cpp
-        src/maths/vec4.cpp
-
         # Other Sources
-        src/maths/geometry.cpp
-        src/maths/transforms.cpp
-        src/maths/trigonometry.cpp
 
         # Libraries
 

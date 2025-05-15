@@ -5,21 +5,15 @@
 
 #pragma once
 
-#include "Instance.hpp"
-#include "Window.hpp"
-
 /**
  * @class Application
  * @brief
  */
 class Application {
 public:
-    Application();
-    ~Application();
 
-    void run();
+    void run() {}
 
 private:
-    Window window;
-    Instance instance;
+
 };
