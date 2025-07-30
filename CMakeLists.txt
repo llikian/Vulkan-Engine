@@ -29,6 +29,15 @@ set(SOURCES
 
         # Other Sources
 
+        # Maths Module
+        src/maths/functions.cpp
+        src/maths/geometry.cpp
+        src/maths/mat3.cpp
+        src/maths/mat4.cpp
+        src/maths/quaternion.cpp
+        src/maths/Transform.cpp
+        src/maths/transforms.cpp
+        src/maths/trigonometry.cpp
 
         # Libraries
 
