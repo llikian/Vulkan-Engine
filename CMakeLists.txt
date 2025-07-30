@@ -24,10 +24,15 @@ find_program(SLANGC_EXECUTABLE slangc HINTS $ENV{VULKAN_SDK}/bin REQUIRED)
 set(SOURCES
         src/main.cpp
 
-        # Classes
+        src/Application.cpp
 
+        # Core Module
+        src/core/callbacks.cpp
+        src/core/EventHandler.cpp
+        src/core/Window.cpp
 
-        # Other Sources
+        # Assets Module
+        src/assets/Camera.cpp
 
         # Maths Module
         src/maths/functions.cpp
