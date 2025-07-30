@@ -47,6 +47,7 @@ void EventHandler::set_active_camera(Camera* camera) {
         std::cerr << "WARNING : Shouldn't change active camera to nullptr.\n";
     } else {
         get().active_camera = camera;
+        camera->update_projection_matrix();
     }
 }
 

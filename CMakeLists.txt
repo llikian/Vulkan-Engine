@@ -29,6 +29,7 @@ set(SOURCES
         # Core Module
         src/core/callbacks.cpp
         src/core/EventHandler.cpp
+        src/core/Instance.cpp
         src/core/Window.cpp
 
         # Assets Module

@@ -11,7 +11,6 @@ static void glfw_error_callback(int code, const char* message) {
 
 Window::Window()
     : window(nullptr) {
-    /* ---- GLFW ---- */
     glfwSetErrorCallback(glfw_error_callback);
 
     if(!glfwInit()) {
@@ -22,13 +21,10 @@ Window::Window()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window = glfwCreateWindow(1920, 1080, "Projet Stage L3", nullptr, nullptr);
-    if(window == nullptr) {
-        throw std::runtime_error("Failed to create window.");
-    }
+    window = glfwCreateWindow(1920, 1080, "Vulkan Engine", nullptr, nullptr);
+    if(window == nullptr) { throw std::runtime_error("Failed to create window."); }
 
     glfwMakeContextCurrent(window);
-    // glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     glfwMaximizeWindow(window);
     glfwGetWindowSize(window, &width, &height);
